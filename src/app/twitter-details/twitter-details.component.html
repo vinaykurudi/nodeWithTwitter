@@ -1,0 +1,30 @@
+<form>
+    <div class=" col col-xs-12">
+        <div class="alert alert-warning" *ngIf="showAlert">
+            <strong>Warning!</strong> {{alertMsg}}
+        </div>
+        <div class="form-group col-xs-6" >
+          <input type="text" maxlength="500" 
+          (key.enter)="search()" name="searchText" style="width:100%;" 
+          class="form-control" [(ngModel)]="searchText" placeholder="Search Text">
+        </div>
+        <button type="submit" (click)="search()" class="btn btn-success">
+            <i class="fa" [ngClass]="{'fa-spinner':searchBtnInprogress, 
+            'fa-pulse':searchBtnInprogress, 'fa-fw':searchBtnInprogress,
+            'fa-search':!searchBtnInprogress}">
+            </i> 
+           Search Tweets
+        </button>
+    </div>
+</form>
+<div class="col col-xs-10">
+        <ul class="list-group">
+            <li *ngFor="let status of statuses" class="list-group-item">
+                <span [title]="status.text">{{status.text}}</span>
+                <span class="pull-right">
+                     <i class="fa fa-retweet re-tweet" aria-hidden="true"> {{status.retweet_count}}</i>
+                    <i class="fa fa-heart-o fav" aria-hidden="true"> {{status.favorite_count}}</i>
+                </span>
+            </li>
+        </ul>
+    </div>
